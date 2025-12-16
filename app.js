@@ -3,9 +3,6 @@ const app = express();
 
 const PORT = 3000;
 
-app.listen(PORT, ()=>{
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
-})
 
 const usersData = [
   { id: 1, name: 'Alice', age: 28, specialty: 'marketing' },
@@ -42,7 +39,7 @@ const usersData = [
 
 function filterUsersBySpecialty(specialty) {
     return usersData.filter (user => user.specialty === specialty);
-};
+}
 
 function generateHTML(title, users) {
   return `
@@ -76,7 +73,7 @@ function generateHTML(title, users) {
 
 app.get('/', (req,res)=>{
     res.send(`
-        <h1></h1>
+        <h1>Home</h1>
         <ul>
         <li><a href="/marketing">Marketing</a></li>
         <li><a href="/developers">Developers</a></li>
@@ -108,6 +105,10 @@ pp.get('/ventas', (req, res)=> {
 });
 
 
+app.use((req, res)=>{
+    res.status(404).send('<h1>404 - Pagina no encontrada</h1>')
+})
 
-
-
+app.listen(PORT, ()=>{
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+})
