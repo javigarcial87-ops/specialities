@@ -44,16 +44,68 @@ function filterUsersBySpecialty(specialty) {
     return usersData.filter (user => user.specialty === specialty);
 };
 
+function generateHTML(title, users) {
+  return `
+    <html>
+      <head>
+        <title>${title}</title>
+      </head>
+      <body>
+        <nav>
+          <a href="/">Home</a> |
+          <a href="/marketing">Marketing</a> |
+          <a href="/developers">Developers</a> |
+          <a href="/QAs">QAs</a> |
+          <a href="/ventas">Ventas</a>
+        </nav>
+
+        <h1>${title}</h1>
+        <p>Total personas: ${users.length}</p>
+
+        <ul>
+          ${users.map(user => `
+            <li>
+              <strong>${user.name}</strong> - ${user.age} años
+            </li>
+          `).join('')}
+        </ul>
+      </body>
+    </html>
+  `;
+};
+
+app.get('/', (req,res)=>{
+    res.send(`
+        <h1></h1>
+        <ul>
+        <li><a href="/marketing">Marketing</a></li>
+        <li><a href="/developers">Developers</a></li>
+        <li><a href="/QAs">QAs</a></li>
+        <li><a href="/ventas">Ventas</a></li>
+        </ul>
+        `);
+});
+
+app.get('/marketing', (req, res)=> {
+    const users = filterUsersBySpecialty('marketing');
+    res.send(generateHTML('Marketing', users));
+});
 
 
+pp.get('/developers', (req, res)=> {
+    const users = filterUsersBySpecialty('developers');
+    res.send(generateHTML('Developers', users));
+});
 
+pp.get('/QAs', (req, res)=> {
+    const users = filterUsersBySpecialty('QAs');
+    res.send(generateHTML('QAs',users));
+});
 
-
-
-
-
-
-
+pp.get('/ventas', (req, res)=> {
+    const users = filterUsersBySpecialty('ventas');
+    res.send(generateHTML('Ventas',users));
+});
 
 
 
