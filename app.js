@@ -76,7 +76,7 @@ app.get('/', (req,res)=>{
         <h1>Home</h1>
         <ul>
         <li><a href="/marketing">Marketing</a></li>
-        <li><a href="/developers">Developers</a></li>
+        <li><a href="/developers">Developors</a></li>
         <li><a href="/QAs">QAs</a></li>
         <li><a href="/ventas">Ventas</a></li>
         </ul>
@@ -89,17 +89,17 @@ app.get('/marketing', (req, res)=> {
 });
 
 
-pp.get('/developers', (req, res)=> {
+app.get('/developers', (req, res)=> {
     const users = filterUsersBySpecialty('developers');
     res.send(generateHTML('Developers', users));
 });
 
-pp.get('/QAs', (req, res)=> {
+app.get('/QAs', (req, res)=> {
     const users = filterUsersBySpecialty('QAs');
     res.send(generateHTML('QAs',users));
 });
 
-pp.get('/ventas', (req, res)=> {
+app.get('/ventas', (req, res)=> {
     const users = filterUsersBySpecialty('ventas');
     res.send(generateHTML('Ventas',users));
 });
